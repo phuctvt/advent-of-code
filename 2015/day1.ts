@@ -1,12 +1,11 @@
-import fs from 'fs';
-import path from 'path';
+import { getAocInput } from '../common/aoc-helper';
 
 const GO_UP = '(';
 
 export function getResult(): string {
     let finalFloor = 0;
     let basementPosition = 0;
-    const input = fs.readFileSync(path.join(require.main!.path, 'input.txt'), 'utf-8');
+    const input = getAocInput();
 
     for (let i = 0; i < input.length; i++) {
         finalFloor = input[i] === GO_UP ? finalFloor + 1 : finalFloor - 1;

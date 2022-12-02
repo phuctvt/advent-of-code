@@ -1,8 +1,7 @@
-import fs from 'fs';
-import path from 'path';
+import { getAocInput } from '../common/aoc-helper';
 
 export function getResult(): string {
-    const input = fs.readFileSync(path.join(require.main!.path, 'input.txt'), 'utf-8');
+    const input = getAocInput()
 
     const commands = input.split('\n');
 
