@@ -1,3 +1,3 @@
-import { getResult } from './2022/day9';
+import { getResult } from './2022/day10-part2';
 
 console.log(getResult());
