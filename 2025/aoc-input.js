@@ -12,6 +12,18 @@
                 flex-direction: column;
                 gap: 15px;
             }
+            .text-input-container {
+                position: relative;
+                width: fit-content;
+            }
+            #paste {
+                position: absolute;
+                right: 0;
+                cursor: pointer;
+                &:hover {
+                    font-weight: bold;
+                }
+            }
         </style>
 
         <div class="container">
@@ -21,9 +33,12 @@
                 </select>
             </aoc-label>
 
-            <aoc-label value="Text input:" multi-line>
-                <textarea id="textInput" rows="10" cols="50"></textarea>
-            </aoc-label>
+            <div class="text-input-container">
+                <div id="paste">[Paste]</div>
+                <aoc-label value="Text input:" multi-line>
+                    <textarea id="textInput" rows="10" cols="50"></textarea>
+                </aoc-label>
+            </div>
         </div>
     `;
 
@@ -37,6 +52,7 @@
         connectedCallback() {
             this.day = this.shadowRoot.getElementById("day");
             this.textInput = this.shadowRoot.getElementById("textInput");
+            this.pasteBtn = this.shadowRoot.getElementById("paste");
 
             if (localStorage.getItem("aoc-day")) {
                 this.day.value = localStorage.getItem("aoc-day");
@@ -49,6 +65,10 @@
                 localStorage.setItem("aoc-day", this.day.value);
             });
             this.textInput.addEventListener("change", () => {
+                localStorage.setItem("aoc-text-input", this.textInput.value);
+            });
+            this.pasteBtn.addEventListener("click", async () => {
+                this.textInput.value = await navigator.clipboard.readText();
                 localStorage.setItem("aoc-text-input", this.textInput.value);
             });
         }
