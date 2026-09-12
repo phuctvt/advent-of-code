@@ -11,17 +11,17 @@
                 flex-direction: column;
                 gap: 15px;
             }
-            button {
+            aoc-button {
                 align-self: start;
             }
         </style>
 
         <h1>Advent of Code 2025</h1>
-        
+
         <div class="container">
             <aoc-input></aoc-input>
 
-            <button>Run</button>
+            <aoc-button>Run</aoc-button>
 
             <div id="outputPlaceHolder"></div>
         </div>
@@ -36,10 +36,10 @@
 
         connectedCallback() {
             this.input = this.shadowRoot.querySelector("aoc-input");
-            this.runButton = this.shadowRoot.querySelector("button");
+            this.runButton = this.shadowRoot.querySelector("aoc-button");
             this.outputPlaceholder = this.shadowRoot.getElementById("outputPlaceHolder");
 
-            this.runButton.addEventListener("click", () => {
+            this.runButton.addEventListener("click", (e) => {
                 const inputData = this.input.getData();
                 const outputElement = document.createElement(`aoc-${inputData.day.replace('.', '')}`);
                 this.outputPlaceholder.replaceChildren(outputElement);

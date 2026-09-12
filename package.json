@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "ts-node index.ts"
+    "start": "ts-node index.ts",
+    "live-server": "live-server"
   },
   "dependencies": {
+    "live-server": "^1.2.2",
     "ts-node": "^10.7.0",
     "typescript": "^4.9.3"
   },

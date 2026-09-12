@@ -1,6 +1,9 @@
 (() => {
     const template = document.createElement('template');
-    const days = ['1.1', '1.2', '2.1', '2.2', '3.1', '3.2', '4.1', '4.2', '5.1', '5.2', '6.1', '6.2', '7.1', '7.2'];
+    const days = [
+        '1.1', '1.2', '2.1', '2.2', '3.1', '3.2', '4.1', '4.2',
+        '5.1', '5.2', '6.1', '6.2', '7.1', '7.2'
+    ];
 
     template.innerHTML = `
         <style>
@@ -19,31 +22,25 @@
             #paste1, #paste2 {
                 position: absolute;
                 right: 0;
-                cursor: pointer;
-                &:hover {
-                    font-weight: bold;
-                }
             }
         </style>
 
         <div class="container">
             <aoc-label value="Day:">
-                <select id="day">
-                    ${days.map(day => `<option value="${day}">${day}</option>`).join('')}
-                </select>
+                <aoc-select id="day"></aoc-select>
             </aoc-label>
 
             <div class="text-input-container">
-                <div id="paste1">[Paste]</div>
+                <aoc-button id="paste1">Paste</aoc-button>
                 <aoc-label id="exampleInputLabel" value="[ ] Example input" multi-line label-cursor-pointer>
-                    <textarea id="exampleInput" rows="10" cols="50"></textarea>
+                    <aoc-textarea id="exampleInput" rows="10" cols="50"></aoc-textarea>
                 </aoc-label>
             </div>
 
             <div class="text-input-container">
-                <div id="paste2">[Paste]</div>
+                <aoc-button id="paste2">Paste</aoc-button>
                 <aoc-label id="actualInputLabel" value="[ ] Actual input" multi-line label-cursor-pointer>
-                    <textarea id="actualInput" rows="10" cols="50"></textarea>
+                    <aoc-textarea id="actualInput" rows="10" cols="50"></aoc-textarea>
                 </aoc-label>
             </div>
         </div>
@@ -63,6 +60,7 @@
 
         connectedCallback() {
             this.day = this.shadowRoot.getElementById("day");
+            this.day.setOptions(days);
             this.exampleInputLabel = this.shadowRoot.getElementById("exampleInputLabel");
             this.exampleInput = this.shadowRoot.getElementById("exampleInput");
             this.actualInputLabel = this.shadowRoot.getElementById("actualInputLabel");
