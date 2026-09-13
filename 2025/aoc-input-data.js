@@ -47,7 +47,7 @@
         </div>
     `;
 
-    class AocInput extends HTMLElement {
+    class AocInputData extends HTMLElement {
         /**
          * @type {'EXAMPLE_INPUT' | 'ACTUAL_INPUT'}
          */
@@ -126,5 +126,5 @@
         }
     }
 
-    customElements.define("aoc-input", AocInput);
+    customElements.define("aoc-input-data", AocInputData);
 })();

@@ -19,7 +19,7 @@
         <h1>Advent of Code 2025</h1>
 
         <div class="container">
-            <aoc-input></aoc-input>
+            <aoc-input-data></aoc-input-data>
 
             <aoc-button>Run</aoc-button>
 
@@ -35,12 +35,12 @@
         }
 
         connectedCallback() {
-            this.input = this.shadowRoot.querySelector("aoc-input");
+            this.inputData = this.shadowRoot.querySelector("aoc-input-data");
             this.runButton = this.shadowRoot.querySelector("aoc-button");
             this.outputPlaceholder = this.shadowRoot.getElementById("outputPlaceHolder");
 
             this.runButton.addEventListener("click", (e) => {
-                const inputData = this.input.getData();
+                const inputData = this.inputData.getData();
                 const outputElement = document.createElement(`aoc-${inputData.day.replace('.', '')}`);
                 this.outputPlaceholder.replaceChildren(outputElement);
                 outputElement.run(inputData.textInput);
