@@ -16,6 +16,9 @@
                         font-weight: inherit;
                     }
                 }
+                &:focus-within {
+                    outline: 5px auto -webkit-focus-ring-color;
+                }
             }
             select {
                 background-color: transparent;
@@ -24,6 +27,9 @@
                 font-family: var(--font-family);
                 font-size: 1rem;
                 cursor: inherit;
+                &:focus {
+                    outline: none;
+                }
             }
         </style>
 

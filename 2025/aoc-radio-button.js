@@ -12,9 +12,14 @@
                 &:hover {
                     font-weight: bold;
                 }
+                &:focus-within {
+                    outline: 5px auto -webkit-focus-ring-color;
+                }
             }
             input {
-                display: none;
+                height: 0;
+                width: 0;
+                position: absolute;
                 & + span::before {
                     content: '[ ]';
                 }

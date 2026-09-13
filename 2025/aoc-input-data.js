@@ -34,14 +34,14 @@
             </aoc-label>
 
             <div class="text-input-container">
-                <aoc-button id="paste1">Paste</aoc-button>
                 <aoc-radio-button id="exampleInputRadio">Example input</aoc-radio-button>
+                <aoc-button id="paste1">Paste</aoc-button>
                 <aoc-textarea id="exampleInput" rows="10" cols="50"></aoc-textarea>
             </div>
 
             <div class="text-input-container">
-                <aoc-button id="paste2">Paste</aoc-button>
                 <aoc-radio-button id="actualInputRadio">Actual input</aoc-radio-button>
+                <aoc-button id="paste2">Paste</aoc-button>
                 <aoc-textarea id="actualInput" rows="10" cols="50"></aoc-textarea>
             </div>
         </div>
