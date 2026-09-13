@@ -18,6 +18,9 @@
             .text-input-container {
                 position: relative;
                 width: fit-content;
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
             }
             #paste1, #paste2 {
                 position: absolute;
@@ -32,16 +35,14 @@
 
             <div class="text-input-container">
                 <aoc-button id="paste1">Paste</aoc-button>
-                <aoc-label id="exampleInputLabel" value="[ ] Example input" multi-line label-cursor-pointer>
-                    <aoc-textarea id="exampleInput" rows="10" cols="50"></aoc-textarea>
-                </aoc-label>
+                <aoc-radio-button id="exampleInputRadio">Example input</aoc-radio-button>
+                <aoc-textarea id="exampleInput" rows="10" cols="50"></aoc-textarea>
             </div>
 
             <div class="text-input-container">
                 <aoc-button id="paste2">Paste</aoc-button>
-                <aoc-label id="actualInputLabel" value="[ ] Actual input" multi-line label-cursor-pointer>
-                    <aoc-textarea id="actualInput" rows="10" cols="50"></aoc-textarea>
-                </aoc-label>
+                <aoc-radio-button id="actualInputRadio">Actual input</aoc-radio-button>
+                <aoc-textarea id="actualInput" rows="10" cols="50"></aoc-textarea>
             </div>
         </div>
     `;
@@ -61,18 +62,18 @@
         connectedCallback() {
             this.day = this.shadowRoot.getElementById("day");
             this.day.setOptions(days);
-            this.exampleInputLabel = this.shadowRoot.getElementById("exampleInputLabel");
+            this.exampleInputRadio = this.shadowRoot.getElementById("exampleInputRadio");
             this.exampleInput = this.shadowRoot.getElementById("exampleInput");
-            this.actualInputLabel = this.shadowRoot.getElementById("actualInputLabel");
+            this.actualInputRadio = this.shadowRoot.getElementById("actualInputRadio");
             this.actualInput = this.shadowRoot.getElementById("actualInput");
             this.pasteBtn1 = this.shadowRoot.getElementById("paste1");
             this.pasteBtn2 = this.shadowRoot.getElementById("paste2");
 
             this.inputType = localStorage.getItem("aoc-input-type") || 'EXAMPLE_INPUT';
             if (this.inputType === 'EXAMPLE_INPUT') {
-                this.checkExampleInput();
+                this.exampleInputRadio.check();
             } else {
-                this.checkActualInput();
+                this.actualInputRadio.check();
             }
 
 
@@ -89,10 +90,10 @@
             this.exampleInput.addEventListener("change", () => {
                 localStorage.setItem("aoc-example-input", this.exampleInput.value);
             });
-            this.exampleInputLabel.addEventListener('label-click', () => {
-                this.checkExampleInput();
+            this.exampleInputRadio.addEventListener('input', () => {
                 this.inputType = 'EXAMPLE_INPUT';
                 localStorage.setItem("aoc-input-type", this.inputType);
+                this.actualInputRadio.uncheck();
             });
             this.pasteBtn1.addEventListener("click", async () => {
                 this.exampleInput.value = await navigator.clipboard.readText();
@@ -105,25 +106,15 @@
             this.actualInput.addEventListener("change", () => {
                 localStorage.setItem("aoc-actual-input", this.actualInput.value);
             });
-            this.actualInputLabel.addEventListener('label-click', () => {
-                this.checkActualInput();
+            this.actualInputRadio.addEventListener('input', () => {
                 this.inputType = 'ACTUAL_INPUT';
                 localStorage.setItem("aoc-input-type", this.inputType);
+                this.exampleInputRadio.uncheck();
             });
             this.pasteBtn2.addEventListener("click", async () => {
                 this.actualInput.value = await navigator.clipboard.readText();
                 localStorage.setItem("aoc-actual-input", this.actualInput.value);
             });
-        }
-
-        checkExampleInput() {
-            this.exampleInputLabel.setAttribute('value', '[x] Example input');
-            this.actualInputLabel.setAttribute('value', '[ ] Actual input');
-        }
-
-        checkActualInput() {
-            this.exampleInputLabel.setAttribute('value', '[ ] Example input');
-            this.actualInputLabel.setAttribute('value', '[x] Actual input');
         }
 
         getData() {
