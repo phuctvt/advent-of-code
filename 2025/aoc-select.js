@@ -6,16 +6,32 @@
             :host {
                 display: inline-block;
             }
+            .container {
+                cursor: pointer;
+                display: inline-flex;
+                align-items: center;
+                &:hover {
+                    font-weight: bold;
+                    select {
+                        font-weight: inherit;
+                    }
+                }
+            }
             select {
                 background-color: transparent;
                 border: none;
                 color: var(--text-color);
                 font-family: var(--font-family);
                 font-size: 1rem;
+                cursor: inherit;
             }
         </style>
 
-        [<select></select>]
+        <span class="container">
+            <span id="prefix">[</span>
+            <select></select>
+            <span id="suffix">]</span>
+        </span>
     `;
 
     class AocSelect extends HTMLElement {
@@ -32,6 +48,16 @@
             this.select.addEventListener('change', e => {
                 this.dispatchEvent(new CustomEvent('change', { composed: true, bubbles: true }));
             })
+
+            this.prefixElement = this.shadowRoot.querySelector('#prefix');
+            this.prefixElement.addEventListener('click', () => {
+                this.select.showPicker();
+            });
+
+            this.suffixElement = this.shadowRoot.querySelector('#suffix');
+            this.suffixElement.addEventListener('click', () => {
+                this.select.showPicker();
+            });
         }
 
         get value() {
